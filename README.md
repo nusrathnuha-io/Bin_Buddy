@@ -1,7 +1,7 @@
 # Bin Buddy
 
 Bin Buddy is a mobile application designed to streamline waste collection processes, making it easier for users to request waste pickups and report issues related to waste management. With an intuitive user interface, Bin Buddy aims to improve waste disposal efficiency and promote environmental sustainability.
-![welcome](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/7ae4ca7d-5d38-41eb-922a-bd797207add3) ![user sign in](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/e77f3191-cc47-4b1e-afea-d047651bd04e) ![signup](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/d7397159-ef0c-4acd-a365-710decab9446)
+![welcome](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/dede66ec-f476-4283-8c57-919caec42b45)![user sign in](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/e77f3191-cc47-4b1e-afea-d047651bd04e) ![signup](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/d7397159-ef0c-4acd-a365-710decab9446)
 
 ![users](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/aecded89-5dd7-4828-b5a5-12ad8f7d1b14)
 
