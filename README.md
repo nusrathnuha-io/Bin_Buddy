@@ -19,7 +19,7 @@ https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/f39f92d3-456f-490d-
 
 - **Request Waste Pickup:** Users can easily request waste pickups by specifying quantity of waste to be collected, along with their location.
 
-![ add request](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/4a46efc4-cf11-4a11-be1b-fd4165c36594) ![request info](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/1b99982c-68ff-45d1-acfb-73273e78f161)
+![add request1](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/ca6901ce-9798-44d2-99f3-b5bf43e4d037)   ![request info](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/1b99982c-68ff-45d1-acfb-73273e78f161)
 
 
 
