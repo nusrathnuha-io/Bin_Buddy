@@ -24,7 +24,6 @@ https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/0fdb6660-abfb-464b-
 
 
 
-
 ![requests](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/47e780b7-b332-42dc-bc56-2e576478fe6f)
 
 
@@ -35,19 +34,19 @@ https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/0fdb6660-abfb-464b-
 
 
 
- 
 ![reports](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/587417df-c529-4447-8331-3fc68ee1b344)   
 
 
 - **User-Friendly Interface:** Bin Buddy features an intuitive and user-friendly interface, making it easy for users to navigate and access its various features.
+
+  
 ![admin dashboard](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/9c38b3ef-e838-41e3-b15b-5f348adf2f6b)  ![user dashboard](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/688472ec-6723-491a-a868-0eff0219abd4)
 
 
 
-![add driver](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/50456390-af6f-4927-92c8-9681a9771f7f) ![driver info](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/fb91ce3c-45ec-4ee2-b26c-28aa168b3da6)
+![add driver](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/50456390-af6f-4927-92c8-9681a9771f7f)  ![driver info](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/fb91ce3c-45ec-4ee2-b26c-28aa168b3da6)
 
-![assign work](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/a6c3f294-a622-4a99-8a42-15e8d06a0413)
-![work info](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/b23b2f04-de36-4c22-866f-53e6c425462a)
+![assign work](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/a6c3f294-a622-4a99-8a42-15e8d06a0413)  ![work info](https://github.com/nusrathnuha-io/Bin_Buddy/assets/136910478/b23b2f04-de36-4c22-866f-53e6c425462a)
 
 
 
