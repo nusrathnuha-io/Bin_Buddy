@@ -73,12 +73,40 @@
             android:textColor="@color/black"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+    <RadioGroup
+        android:id="@+id/user_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/repassword_layout">
+    <!-- Radio Buttons for User Types -->
+    <RadioButton
+        android:id="@+id/radio_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:checked="true"
+        android:layout_marginStart="16dp"/>
 
+    <RadioButton
+        android:id="@+id/radio_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:layout_marginStart="16dp"/>
+
+    <RadioButton
+        android:id="@+id/radio_driver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Driver"
+        android:layout_marginStart="16dp"/>
+    </RadioGroup>
     <Button
         android:id="@+id/btnsignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/repassword_layout"
+        android:layout_below="@id/user_type"
         android:layout_marginTop="16dp"
         android:text="Sign Up"
         android:textColor="@color/white"

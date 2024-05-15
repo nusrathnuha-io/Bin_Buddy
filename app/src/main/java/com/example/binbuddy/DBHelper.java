@@ -1,5 +1,6 @@
 package com.example.binbuddy;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,8 +8,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "BinBuddy.db";
+    private static final String DB_NAME = "Sytem_BinBuddy.db";
     private static final int DB_VERSION = 1;
+
+    // Table and column names
+    private static final String TABLE_USERS = "users";
+    private static final String COLUMN_USERNAME = "username";
+    private static final String COLUMN_PASSWORD = "password";
+    private static final String COLUMN_USER_TYPE = "user_type";
+
+    // User types
+    public static final String USER_TYPE_ADMIN = "Admin";
+    public static final String USER_TYPE_DRIVER = "Driver";
+    public static final String USER_TYPE_USER = "User";
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -17,24 +29,21 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create table for users
-        db.execSQL("CREATE TABLE  users(username TEXT PRIMARY KEY, password TEXT)");
-
-        // Create table for admins
-        db.execSQL("CREATE TABLE  admins(username TEXT PRIMARY KEY, password TEXT)");
-
-        // Create table for drivers
-        db.execSQL("CREATE TABLE  drivers(username TEXT PRIMARY KEY, password TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_USERS + "(" +
+                COLUMN_USERNAME + " TEXT PRIMARY KEY, " +
+                COLUMN_PASSWORD + " TEXT, " +
+                COLUMN_USER_TYPE + " TEXT)");
 
         // Create table for driver information
-        db.execSQL("CREATE TABLE  Driver_Information (" +
+        db.execSQL("CREATE TABLE Driver_Information (" +
                 "driver_name TEXT," +
-                "driver_id TEXT PRIMARY KEY ," +
+                "driver_id TEXT PRIMARY KEY," +
                 "vehicle_id TEXT," +
-                "license_no TEXT UNIQUE," +  // Added UNIQUE constraint to license_no
+                "license_no TEXT UNIQUE," +
                 "phone_number TEXT)");
 
         // Create table for requests
-        db.execSQL("CREATE TABLE  requests (" +
+        db.execSQL("CREATE TABLE requests (" +
                 "request_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
                 "phone_number TEXT," +
@@ -45,9 +54,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "status TEXT," +
                 "FOREIGN KEY(driver_id) REFERENCES Driver_Information(driver_id) ON DELETE CASCADE)");
 
-
         // Create table for reports
-        db.execSQL("CREATE TABLE  reports (" +
+        db.execSQL("CREATE TABLE reports (" +
                 "report_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT," +
                 "phone_number TEXT," +
@@ -59,9 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
         // Drop all tables if the database version is upgraded
-        MyDB.execSQL("DROP TABLE IF EXISTS users");
-        MyDB.execSQL("DROP TABLE IF EXISTS admins");
-        MyDB.execSQL("DROP TABLE IF EXISTS drivers");
+        MyDB.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         MyDB.execSQL("DROP TABLE IF EXISTS Driver_Information");
         MyDB.execSQL("DROP TABLE IF EXISTS requests");
         MyDB.execSQL("DROP TABLE IF EXISTS reports");
@@ -69,94 +75,41 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // for the insert for User
-    public Boolean insertData(String username, String password){
+
+    public Boolean insertData(String username, String password, String userType) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        ContentValues contentValues= new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("password", password);
-        long result = MyDB.insert("users", null, contentValues);
-        if(result==-1) return false;
-        else
-            return true;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_USERNAME, username);
+        contentValues.put(COLUMN_PASSWORD, password);
+        contentValues.put(COLUMN_USER_TYPE, userType); // Add user type
+        long result = MyDB.insert(TABLE_USERS, null, contentValues);
+        if (result == -1) return false;
+        else return true;
     }
 
     public Boolean checkusername(String username) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+        Cursor cursor = MyDB.rawQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = ?", new String[]{username});
         if (cursor.getCount() > 0)
             return true;
-        else
-            return false;
+        else return false;
     }
 
-    public Boolean checkusernamepassword(String username, String password){
+    public String checkusernamepassword(String username, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username,password});
-        if(cursor.getCount()>0)
-            return true;
-        else
-            return false;
+        Cursor cursor = MyDB.rawQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + " = ?", new String[]{username, password});
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") String userType = cursor.getString(cursor.getColumnIndex(COLUMN_USER_TYPE));
+            if (userType.equals(USER_TYPE_ADMIN)) {
+                return USER_TYPE_ADMIN; // Admin
+            } else if (userType.equals(USER_TYPE_DRIVER)) {
+                return USER_TYPE_DRIVER; // Driver
+            } else if (userType.equals(USER_TYPE_USER)) {
+                return USER_TYPE_USER; // User
+            }
+        }
+        cursor.close();
+        return null; // Default to null if user not found or type not recognized
     }
 
-
-// for the Admin
-public Boolean insertAdminData(String username, String password){
-    SQLiteDatabase MyDB = this.getWritableDatabase();
-    ContentValues contentValues= new ContentValues();
-    contentValues.put("username", username);
-    contentValues.put("password", password);
-    long result = MyDB.insert("admins", null, contentValues);
-    if(result==-1) return false;
-    else
-        return true;
-}
-
-    public Boolean checkusernameAdmin(String username) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from admins where username = ?", new String[]{username});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
-    }
-
-    public Boolean checkusernamepasswordAdmin(String username, String password){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from admins where username = ? and password = ?", new String[] {username,password});
-        if(cursor.getCount()>0)
-            return true;
-        else
-            return false;
-    }
-
-
-// for the driver
-public Boolean insertDriverData(String username, String password){
-    SQLiteDatabase MyDB = this.getWritableDatabase();
-    ContentValues contentValues= new ContentValues();
-    contentValues.put("username", username);
-    contentValues.put("password", password);
-    long result = MyDB.insert("drivers", null, contentValues);
-    if(result==-1) return false;
-    else
-        return true;
-}
-
-    public Boolean checkusernamedriver(String username) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from drivers where username = ?", new String[]{username});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
-    }
-
-    public Boolean checkusernamepassworddriver(String username, String password){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from drivers where username = ? and password = ?", new String[] {username,password});
-        if(cursor.getCount()>0)
-            return true;
-        else
-            return false;
-    }
 }

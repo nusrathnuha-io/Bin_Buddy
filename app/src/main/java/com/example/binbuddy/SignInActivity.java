@@ -1,7 +1,5 @@
 package com.example.binbuddy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class SignInActivity extends AppCompatActivity {
-    EditText username, password;
-    Button Btnsignin, BtnsignUp;
+
+    EditText usernameInput, passwordInput;
+    Button signInButton, signUpButton;
     DBHelper DB;
 
     @Override
@@ -19,35 +20,54 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        username = findViewById(R.id.editTextUsername);
-        password = findViewById(R.id.editTextPassword);
-        Btnsignin = findViewById(R.id.buttonSignIn);
-        BtnsignUp = findViewById(R.id.btnsignup);
+        usernameInput = findViewById(R.id.editTextUsername);
+        passwordInput = findViewById(R.id.editTextPassword);
+        signInButton = findViewById(R.id.buttonSignIn);
+        signUpButton = findViewById(R.id.btnsignup);
         DB = new DBHelper(this);
 
-        Btnsignin.setOnClickListener(new View.OnClickListener() {
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
+                String user = usernameInput.getText().toString().trim();
+                String pass = passwordInput.getText().toString().trim();
 
-                if (user.equals("") || pass.equals(""))
+                if (user.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(SignInActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                else {
-                    Boolean checkuserpass = DB.checkusernamepassword(user, pass);
-                    if (checkuserpass) {
-                        Toast.makeText(SignInActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
-                        startActivity(intent);
+                } else {
+                    // Perform login authentication using DBHelper
+                    String userType = DB.checkusernamepassword(user, pass);
+
+                    if (userType != null) {
+                        // Login successful, check user type and direct to respective activity
+                        if (userType.equals(DBHelper.USER_TYPE_ADMIN)) {
+                            // Admin, direct to AdminActivity
+                            Toast.makeText(SignInActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignInActivity.this, AdminActivity.class);
+                            intent.putExtra("USER_NAME", user);
+                            startActivity(intent);
+                        } else if (userType.equals(DBHelper.USER_TYPE_DRIVER)) {
+                            // Driver, direct to DriverActivity
+                            Toast.makeText(SignInActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignInActivity.this, DriverActivity.class);
+                            intent.putExtra("USER_NAME", user);
+                            startActivity(intent);
+                        } else if (userType.equals(DBHelper.USER_TYPE_USER)) {
+                            // User, direct to UserActivity
+                            Toast.makeText(SignInActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignInActivity.this, UserActivity.class);
+                            intent.putExtra("USER_NAME", user);
+                            startActivity(intent);
+                        }
                     } else {
+                        // Invalid credentials
                         Toast.makeText(SignInActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
 
-
-        BtnsignUp.setOnClickListener(new View.OnClickListener() {
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Navigate to the sign-up activity
