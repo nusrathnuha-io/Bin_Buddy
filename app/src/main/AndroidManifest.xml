@@ -61,22 +61,7 @@
             android:name=".ReportActivity"
             android:exported="true">
         </activity>
-        <activity
-            android:name=".AdminSignInActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".AdminSignUpActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".DriverSigninActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".DriverSignUpActivity"
-            android:exported="true">
-        </activity>
+
         <activity
             android:name=".DisplayDriverInformationActivity"
             android:exported="true"
